@@ -40,24 +40,23 @@ class _ReorderableWidgetState extends State<ReorderableWidget> {
       });
     }
 
-    var wrap = SingleChildScrollView(
+    var wrap = ReorderableWrap(
+      spacing: 8.0,
+      runSpacing: 4.0,
       controller: _scrollController,
-      child: ReorderableWrap(
-          spacing: 8.0,
-          runSpacing: 4.0,
-          controller: _scrollController,
-          padding: const EdgeInsets.all(8),
-          children: _tiles,
-          onReorder: _onReorder,
-          onNoReorder: (int index) {
-            //this callback is optional
-            debugPrint('${DateTime.now().toString().substring(5, 22)} reorder cancelled. index:$index');
-          },
-          onReorderStarted: (int index) {
-            //this callback is optional
-            debugPrint('${DateTime.now().toString().substring(5, 22)} reorder started: index:$index');
-          }
-      ),
+      padding: const EdgeInsets.all(8),
+      children: _tiles,
+      onReorder: _onReorder,
+      onNoReorder: (int index) {
+        //this callback is optional
+        debugPrint(
+            '${DateTime.now().toString().substring(5, 22)} reorder cancelled. index:$index');
+      },
+      onReorderStarted: (int index) {
+        //this callback is optional
+        debugPrint(
+            '${DateTime.now().toString().substring(5, 22)} reorder started: index:$index');
+      },
     );
 
     var column = Column(
@@ -98,6 +97,5 @@ class _ReorderableWidgetState extends State<ReorderableWidget> {
     return SingleChildScrollView(
       child: column,
     );
-
   }
 }
